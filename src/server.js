@@ -7,6 +7,7 @@ import path from "node:path";
 import express from "express";
 import httpProxy from "http-proxy";
 import * as tar from "tar";
+import { startDiscordBot } from './discord-bot.js';
 
 // Migrate deprecated CLAWDBOT_* env vars → OPENCLAW_* so existing Railway deployments
 // keep working. Users should update their Railway Variables to use the new names.
