@@ -89,6 +89,4 @@ export async function startDiscordBot() {
   await client.login(DISCORD_TOKEN);
   return client;
 }
-    Then edit src/server.js — add the import and startup code (I'll give you exact lines if needed)
-
-Once you commit, Railway deploys in 2 min and the bot wi
+   
