@@ -300,6 +300,25 @@ const app = express();
 app.disable("x-powered-by");
 app.use(express.json({ limit: "1mb" }));
 
+// Start Discord bot
+let discordClient = null;
+(async () => {
+  try {
+    discordClient = await startDiscordBot();
+  } catch (err) {
+    console.error('[server] Failed to start Discord bot:', err);
+  }
+})();
+
+// Graceful shutdown
+process.on('SIGTERM', async () => {
+  console.log('[server] SIGTERM received, shutting down...');
+  if (discordClient) {
+    await discordClient.destroy();
+  }
+  process.exit(0);
+});
+
 // Minimal health endpoint for Railway.
 app.get("/setup/healthz", (_req, res) => res.json({ ok: true }));
 
